@@ -4,7 +4,8 @@
   "description": "A small and simple library for asserting argument are the correct types",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:live": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,9 @@
     "jest": "^22.4.3"
   },
   "engines": {
-    "node" : ">=4.9.1"
+    "node": ">=6.4.0"
+  },
+  "dependencies": {
+    "eslint": "^4.19.1"
   }
 }
