@@ -4,6 +4,7 @@
   "description": "A small and simple library for asserting argument are the correct types",
   "main": "index.js",
   "scripts": {
+    "pretest": "eslint src/ && nsp check",
     "start": "node demo/index.js",
     "test": "jest",
     "test:live": "jest --watch"
@@ -33,7 +34,8 @@
   "homepage": "https://github.com/terodox/argument-contracts#readme",
   "devDependencies": {
     "eslint": "^4.19.1",
-    "jest": "^22.4.3"
+    "jest": "^22.4.3",
+    "nsp": "^3.2.1"
   },
   "engines": {
     "node": ">=6.4.0"
