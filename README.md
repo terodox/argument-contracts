@@ -33,5 +33,5 @@ For more usage examples please see [Demo](demo/index.js)
 
 # Contributing
 
-See [CONTRIBUTING.md]{CONTRIBUTING.md}
+See [CONTRIBUTING.md](CONTRIBUTING.md)
 
