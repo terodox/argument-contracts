@@ -1,0 +1,43 @@
+{
+  "name": "argument-contracts",
+  "version": "0.0.0",
+  "description": "A small and simple library for asserting argument are the correct types",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "eslint src/ && nsp check",
+    "start": "node demo/index.js",
+    "test": "jest",
+    "test:live": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/terodox/argument-contracts.git"
+  },
+  "keywords": [
+    "types",
+    "type",
+    "assert",
+    "assertion",
+    "check",
+    "argument",
+    "contract",
+    "type-safe",
+    "safety",
+    "contracts",
+    "arguments"
+  ],
+  "author": "Andy Desmarais <terodoxnpm@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/terodox/argument-contracts/issues"
+  },
+  "homepage": "https://github.com/terodox/argument-contracts#readme",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "jest": "^22.4.3",
+    "nsp": "^3.2.1"
+  },
+  "engines": {
+    "node": ">=6.4.0"
+  }
+}
