@@ -1,10 +1,12 @@
 {
   "name": "argument-contracts",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A small and simple library for asserting argument are the correct types",
   "main": "index.js",
   "scripts": {
+    "postversion": "git push --follow-tags",
     "pretest": "eslint src/ && nsp check",
+    "preversion": "npm test",
     "start": "node demo/index.js",
     "test": "jest",
     "test:live": "jest --watch"
