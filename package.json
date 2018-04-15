@@ -4,6 +4,7 @@
   "description": "A small and simple library for asserting argument are the correct types",
   "main": "index.js",
   "scripts": {
+    "start": "node demo/index.js",
     "test": "jest",
     "test:live": "jest --watch"
   },
