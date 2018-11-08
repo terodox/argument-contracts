@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postversion": "git push --follow-tags",
-    "pretest": "eslint src/ && npm audit",
+    "pretest": "eslint index.js && npm audit",
     "preversion": "npm test",
     "start": "node demo/index.js",
     "test": "jest",
@@ -35,8 +35,8 @@
   },
   "homepage": "https://github.com/terodox/argument-contracts#readme",
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "jest": "^23.0.0"
+    "eslint": "5.8.0",
+    "jest": "23.5.0"
   },
   "engines": {
     "node": ">=6.4.0"
