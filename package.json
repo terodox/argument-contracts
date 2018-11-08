@@ -1,6 +1,6 @@
 {
   "name": "argument-contracts",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A small and simple library for asserting argument are the correct types",
   "main": "index.js",
   "scripts": {
