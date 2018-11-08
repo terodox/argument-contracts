@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postversion": "git push --follow-tags",
-    "pretest": "eslint src/ && nsp check",
+    "pretest": "eslint src/ && npm audit",
     "preversion": "npm test",
     "start": "node demo/index.js",
     "test": "jest",
