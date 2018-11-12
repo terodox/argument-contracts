@@ -346,4 +346,92 @@ describe('ArgumentContracts', () => {
             expect(() => ArgumentContracts.assertType(argument, String)).toThrowError(/Expected/);
         });
     });
+
+    describe('assertBoolean', () => {
+        it('should be a static method', () => {
+            expect(ArgumentContracts.assertBoolean).toEqual(expect.any(Function));
+        });
+
+        it('should throw if argument is not a string', () => {
+            expect(() => ArgumentContracts.assertBoolean(null)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertBoolean(undefined)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertBoolean(1234)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertBoolean({})).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertBoolean([])).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertBoolean(()=>{})).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertBoolean(class thing {})).toThrowError(/Expected/);
+        });
+
+        it('should throw error with argumentName if argument is not a string and argument name is provided', () => {
+            const argumentName = 'thatThingYouLike';
+            expect(() => ArgumentContracts.assertBoolean(null, argumentName)).toThrowError(new RegExp(argumentName));
+        });
+
+        it('should NOT throw if argument is a boolean', () => {
+            expect(() => ArgumentContracts.assertBoolean(false)).not.toThrow();
+        });
+
+        it('should NOT throw if argument is a Boolean', () => {
+            expect(() => ArgumentContracts.assertBoolean(Boolean(true))).not.toThrow();
+        });
+
+        it('should stringify argument when throwing error', () => {
+            const argument = { herWeGo: 'again' };
+            try {
+                ArgumentContracts.assertBoolean(argument);
+            } catch(error) {
+                expect(error.message).toMatch(JSON.stringify(argument));
+            }
+        });
+
+        it('should throw correct message if stringfy fails', () => {
+            const argument = { herWeGo: 'again' };
+            argument.then = argument;
+            expect(() => ArgumentContracts.assertBoolean(argument)).toThrowError(/Expected/);
+        });
+    });
+
+    describe('assertSymbol', () => {
+        it('should be a static method', () => {
+            expect(ArgumentContracts.assertSymbol).toEqual(expect.any(Function));
+        });
+
+        it('should throw if argument is not a string', () => {
+            expect(() => ArgumentContracts.assertSymbol(null)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertSymbol(undefined)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertSymbol(1234)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertSymbol({})).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertSymbol([])).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertSymbol(()=>{})).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertSymbol(class thing {})).toThrowError(/Expected/);
+        });
+
+        it('should throw error with argumentName if argument is not a string and argument name is provided', () => {
+            const argumentName = 'thatThingYouLike';
+            expect(() => ArgumentContracts.assertSymbol(null, argumentName)).toThrowError(new RegExp(argumentName));
+        });
+
+        it('should NOT throw if argument is a known Symbol', () => {
+            expect(() => ArgumentContracts.assertSymbol(Symbol.iterator)).not.toThrow();
+        });
+
+        it('should NOT throw if argument is a custom Symbol', () => {
+            expect(() => ArgumentContracts.assertSymbol(Symbol(1))).not.toThrow();
+        });
+
+        it('should stringify argument when throwing error', () => {
+            const argument = { herWeGo: 'again' };
+            try {
+                ArgumentContracts.assertSymbol(argument);
+            } catch(error) {
+                expect(error.message).toMatch(JSON.stringify(argument));
+            }
+        });
+
+        it('should throw correct message if stringfy fails', () => {
+            const argument = { herWeGo: 'again' };
+            argument.then = argument;
+            expect(() => ArgumentContracts.assertSymbol(argument)).toThrowError(/Expected/);
+        });
+    });
 });

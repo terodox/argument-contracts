@@ -50,6 +50,12 @@ module.exports = class ArgumentContracts {
         }
     }
 
+    static assertBoolean(argument, argumentName) {
+        if (!isTypeMatch(argument, Boolean)) {
+            throwError(argument, argumentName, 'a boolean');
+        }
+    }
+
     static assertFunction(argument, argumentName) {
         if (!isTypeMatch(argument, Function)) {
             throwError(argument, argumentName, 'a function');
@@ -65,6 +71,12 @@ module.exports = class ArgumentContracts {
     static assertString(argument, argumentName) {
         if (!isTypeMatch(argument, String)) {
             throwError(argument, argumentName, 'a string');
+        }
+    }
+
+    static assertSymbol(argument, argumentName) {
+        if (!isTypeMatch(argument, Symbol)) {
+            throwError(argument, argumentName, 'a symbol');
         }
     }
 
