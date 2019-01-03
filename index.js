@@ -7,6 +7,10 @@ function isTypeMatch(argument, type) {
         return typeof argument == 'number' || argument instanceof Number;
     }
 
+    if (type == Date) {
+        return (argument instanceof Date || argument) && JSON.stringify(new Date(argument)) !== 'null';
+    }
+
     if (type == Function) {
         return typeof argument == 'function' || argument instanceof Function;
     }
@@ -52,6 +56,12 @@ module.exports = class ArgumentContracts {
 
     static assertBoolean(argument, argumentName) {
         if (!isTypeMatch(argument, Boolean)) {
+            throwError(argument, argumentName, 'a boolean');
+        }
+    }
+
+    static assertDate(argument, argumentName) {
+        if (!isTypeMatch(argument, Date)) {
             throwError(argument, argumentName, 'a boolean');
         }
     }

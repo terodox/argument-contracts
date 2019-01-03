@@ -93,6 +93,52 @@ describe('ArgumentContracts', () => {
         });
     });
 
+    describe('assertDate', () => {
+        it('should be a static method', () => {
+            expect(ArgumentContracts.assertDate).toEqual(expect.any(Function));
+        });
+
+        it('should throw if argument is not a Date', () => {
+            expect(() => ArgumentContracts.assertDate(null)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertDate(undefined)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertDate('Some stringy thingy')).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertDate({})).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertDate([])).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertDate(()=>{})).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertDate(class thing {})).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertDate(new Date('asdf'))).toThrowError(/Expected/);
+        });
+
+        it('should throw error with argumentName if argument is not a Date and argument name is provided', () => {
+            const argumentName = 'thatThingYouLike';
+            expect(() => ArgumentContracts.assertDate(null, argumentName)).toThrowError(new RegExp(argumentName));
+        });
+
+        it('should NOT throw if argument is an Number because numbers are valid dates!', () => {
+            expect(() => ArgumentContracts.assertDate(1234)).not.toThrow();
+            expect(() => ArgumentContracts.assertDate(1234.1234)).not.toThrow();
+        });
+
+        it('should NOT throw if argument is a Date', () => {
+            expect(() => ArgumentContracts.assertDate(new Date())).not.toThrow();
+        });
+
+        it('should stringify argument when throwing error', () => {
+            const argument = { herWeGo: 'again' };
+            try {
+                ArgumentContracts.assertDate(argument);
+            } catch(error) {
+                expect(error.message).toMatch(JSON.stringify(argument));
+            }
+        });
+
+        it('should throw correct message if stringfy fails', () => {
+            const argument = { herWeGo: 'again' };
+            argument.then = argument;
+            expect(() => ArgumentContracts.assertDate(argument)).toThrowError(/Expected/);
+        });
+    });
+
     describe('assertFunction', () => {
         it('should be a static method', () => {
             expect(ArgumentContracts.assertFunction).toEqual(expect.any(Function));
