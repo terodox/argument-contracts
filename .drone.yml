@@ -3,53 +3,45 @@ clone:
     image: plugins/git
 
 pipeline:
-  node6:
-    group: validate
+  install:
     image: node:6
     commands:
-    - npm i -g npm
-    - npm i
+      - npm i
+  node6:
+    group: test
+    image: node:6
+    commands:
     - npm test
   node7:
-    group: validate
+    group: test
     image: node:7
     commands:
-    - npm i -g npm
-    - npm i
     - npm test
   node8:
-    group: validate
+    group: test
     image: node:8
     commands:
-    - npm i -g npm
-    - npm i
     - npm test
   node9:
-    group: validate
+    group: test
     image: node:9
     commands:
-    - npm i -g npm
-    - npm i
     - npm test
   node10:
-    group: validate
+    group: test
     image: node:10
     commands:
-    - npm i -g npm
-    - npm i
     - npm test
   node11:
-    group: validate
+    group: test
     image: node:11
     commands:
-    - npm i -g npm
-    - npm i
     - npm test
   publish:
     image: node:10
     commands:
-      - npm i -g npm
       - echo "//registry.npmjs.org/:_authToken=$${NPM_DEPLOY_TOKEN}" > ~/.npmrc
+      - echo "unsafe-perm=true" >> ~/.npmrc
       - npm publish
     secrets:
       - npm_deploy_token
