@@ -8,32 +8,32 @@ pipeline:
     commands:
       - npm i
   node6:
-    group: build
+    group: test
     image: node:6
     commands:
     - npm test
   node7:
-    group: build
+    group: test
     image: node:7
     commands:
     - npm test
   node8:
-    group: build
+    group: test
     image: node:8
     commands:
     - npm test
   node9:
-    group: build
+    group: test
     image: node:9
     commands:
     - npm test
   node10:
-    group: validate
+    group: test
     image: node:10
     commands:
     - npm test
   node11:
-    group: build
+    group: test
     image: node:11
     commands:
     - npm test
