@@ -5,7 +5,7 @@ clone:
 pipeline:
   node6:
     group: build
-    image: node:6
+    image: node:6-alpine
     commands:
     - npm i -g npm
     - npm i
