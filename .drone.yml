@@ -4,28 +4,28 @@ clone:
 
 pipeline:
   node6:
-    group: validate
+    group: build
     image: node:6
     commands:
     - npm i -g npm
     - npm i
     - npm test
   node7:
-    group: validate
+    group: build
     image: node:7
     commands:
     - npm i -g npm
     - npm i
     - npm test
   node8:
-    group: validate
+    group: build
     image: node:8
     commands:
     - npm i -g npm
     - npm i
     - npm test
   node9:
-    group: validate
+    group: build
     image: node:9
     commands:
     - npm i -g npm
@@ -39,7 +39,7 @@ pipeline:
     - npm i
     - npm test
   node11:
-    group: validate
+    group: build
     image: node:11
     commands:
     - npm i -g npm
