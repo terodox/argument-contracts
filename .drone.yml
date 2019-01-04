@@ -10,13 +10,13 @@ pipeline:
     - npm i -g npm
     - npm i
     - npm test
-  node7:
-    group: build
-    image: node:7
-    commands:
-    - npm i -g npm
-    - npm i
-    - npm test
+  # node7:
+  #   group: build
+  #   image: node:7
+  #   commands:
+  #   - npm i -g npm
+  #   - npm i
+  #   - npm test
   # node8:
   #   group: build
   #   image: node:8
