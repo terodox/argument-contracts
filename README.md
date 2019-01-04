@@ -1,5 +1,9 @@
 # argument-contracts
+
+[![Build Status](https://cloud.drone.io/api/badges/terodox/argument-contracts/status.svg)](https://cloud.drone.io/terodox/argument-contracts)``
+
 A small and simple library for asserting argument are the correct types
+
 
 # Install
 
