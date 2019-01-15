@@ -37,7 +37,7 @@ function throwError(argument, argumentName, typeString) {
     } catch (_) {
         argumentString = argument;
     }
-    throw new TypeError(`Expected ${argumentName || 'argument'} to be ${typeString}. Value received: ${argumentString}`);
+    throw new TypeError('Expected ' + (argumentName || 'argument') + ' to be ' + typeString + '. Value received: ' + argumentString);
 }
 
 module.exports = class ArgumentContracts {
@@ -50,7 +50,7 @@ module.exports = class ArgumentContracts {
     static assertArrayOf(argument, type, argumentName) {
         ArgumentContracts.assertArray(argument, argumentName);
         if (!argument.every(item => isTypeMatch(item, type))) {
-            throwError(argument, argumentName, `an array of ${type}`);
+            throwError(argument, argumentName, 'an array of ' + type);
         }
     }
 
@@ -92,7 +92,7 @@ module.exports = class ArgumentContracts {
 
     static assertType(argument, type, argumentName) {
         if (!isTypeMatch(argument, type)) {
-            throwError(argument, argumentName, `a ${type}`);
+            throwError(argument, argumentName, 'a ' + type);
         }
     }
 };
