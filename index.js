@@ -40,57 +40,57 @@ function throwError(argument, argumentName, typeString) {
     throw new TypeError('Expected ' + (argumentName || 'argument') + ' to be ' + typeString + '. Value received: ' + argumentString);
 }
 
-module.exports = class ArgumentContracts {
-    static assertArray(argument, argumentName) {
+module.exports = {
+    assertArray: function(argument, argumentName) {
         if (!Array.isArray(argument)) {
             throwError(argument, argumentName, 'an array');
         }
-    }
+    },
 
-    static assertArrayOf(argument, type, argumentName) {
-        ArgumentContracts.assertArray(argument, argumentName);
-        if (!argument.every(item => isTypeMatch(item, type))) {
+    assertArrayOf: function(argument, type, argumentName) {
+        this.assertArray(argument, argumentName);
+        if (!argument.every(function(item) { return isTypeMatch(item, type);})) {
             throwError(argument, argumentName, 'an array of ' + type);
         }
-    }
+    },
 
-    static assertBoolean(argument, argumentName) {
+    assertBoolean: function(argument, argumentName) {
         if (!isTypeMatch(argument, Boolean)) {
             throwError(argument, argumentName, 'a boolean');
         }
-    }
+    },
 
-    static assertDate(argument, argumentName) {
+    assertDate: function(argument, argumentName) {
         if (!isTypeMatch(argument, Date)) {
             throwError(argument, argumentName, 'a boolean');
         }
-    }
+    },
 
-    static assertFunction(argument, argumentName) {
+    assertFunction: function(argument, argumentName) {
         if (!isTypeMatch(argument, Function)) {
             throwError(argument, argumentName, 'a function');
         }
-    }
+    },
 
-    static assertNumber(argument, argumentName) {
+    assertNumber: function(argument, argumentName) {
         if (!isTypeMatch(argument, Number)) {
             throwError(argument, argumentName, 'a number');
         }
-    }
+    },
 
-    static assertString(argument, argumentName) {
+    assertString: function(argument, argumentName) {
         if (!isTypeMatch(argument, String)) {
             throwError(argument, argumentName, 'a string');
         }
-    }
+    },
 
-    static assertSymbol(argument, argumentName) {
+    assertSymbol: function(argument, argumentName) {
         if (!isTypeMatch(argument, Symbol)) {
             throwError(argument, argumentName, 'a symbol');
         }
-    }
+    },
 
-    static assertType(argument, type, argumentName) {
+    assertType: function(argument, type, argumentName) {
         if (!isTypeMatch(argument, type)) {
             throwError(argument, argumentName, 'a ' + type);
         }

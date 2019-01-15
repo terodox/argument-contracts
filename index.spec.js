@@ -2,7 +2,7 @@ const ArgumentContracts = require('./index');
 
 describe('ArgumentContracts', () => {
     it('should exist', () => {
-        expect(ArgumentContracts).toEqual(expect.any(Function));
+        expect(ArgumentContracts).toEqual(expect.any(Object));
     });
 
     describe('assertString', () => {
