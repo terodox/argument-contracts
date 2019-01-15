@@ -49,7 +49,7 @@ module.exports = {
 
     assertArrayOf: function(argument, type, argumentName) {
         this.assertArray(argument, argumentName);
-        if (!argument.every(item => isTypeMatch(item, type))) {
+        if (!argument.every(function(item) { return isTypeMatch(item, type);})) {
             throwError(argument, argumentName, 'an array of ' + type);
         }
     },
