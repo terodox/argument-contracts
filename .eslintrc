@@ -115,7 +115,7 @@
     ],
     "no-confusing-arrow": "error",
     "no-useless-constructor": "error",
-    "no-var": "error",
+    "no-var": "off",
     "prefer-const": "error",
     "prefer-template": "off"
   }

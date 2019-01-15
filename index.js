@@ -31,7 +31,7 @@ function isTypeMatch(argument, type) {
 }
 
 function throwError(argument, argumentName, typeString) {
-    let argumentString;
+    var argumentString;
     try {
         argumentString = JSON.stringify(argument);
     } catch (_) {
