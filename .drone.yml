@@ -7,7 +7,7 @@ pipeline:
     image: node:11
     commands:
       - npm i
-  node11:
+  test:
     group: test
     image: node:11
     commands:
