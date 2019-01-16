@@ -1,8 +1,8 @@
-const ArgumentContracts = require('./index');
+import ArgumentContracts from './index';
 
 describe('ArgumentContracts', () => {
     it('should exist', () => {
-        expect(ArgumentContracts).toEqual(expect.any(Object));
+        expect(ArgumentContracts).toEqual(expect.any(Function));
     });
 
     describe('assertString', () => {
@@ -43,7 +43,7 @@ describe('ArgumentContracts', () => {
         });
 
         it('should throw correct message if stringfy fails', () => {
-            const argument = { herWeGo: 'again' };
+            const argument: any = { herWeGo: 'again' };
             argument.then = argument;
             expect(() => ArgumentContracts.assertString(argument)).toThrowError(/Expected/);
         });
@@ -87,7 +87,7 @@ describe('ArgumentContracts', () => {
         });
 
         it('should throw correct message if stringfy fails', () => {
-            const argument = { herWeGo: 'again' };
+            const argument: any = { herWeGo: 'again' };
             argument.then = argument;
             expect(() => ArgumentContracts.assertNumber(argument)).toThrowError(/Expected/);
         });
@@ -101,11 +101,11 @@ describe('ArgumentContracts', () => {
         it('should throw if argument is not a Date', () => {
             expect(() => ArgumentContracts.assertDate(null)).toThrowError(/Expected/);
             expect(() => ArgumentContracts.assertDate(undefined)).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertDate('Some stringy thingy')).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertDate({})).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertDate([])).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertDate(()=>{})).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertDate(class thing {})).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertDate(<any>'Some stringy thingy')).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertDate(<any>{})).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertDate(<any>[])).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertDate(<any>(()=>{}))).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertDate(<any>(class thing {}))).toThrowError(/Expected/);
             expect(() => ArgumentContracts.assertDate(new Date('asdf'))).toThrowError(/Expected/);
         });
 
@@ -124,7 +124,7 @@ describe('ArgumentContracts', () => {
         });
 
         it('should stringify argument when throwing error', () => {
-            const argument = { herWeGo: 'again' };
+            const argument: any = { herWeGo: 'again' };
             try {
                 ArgumentContracts.assertDate(argument);
             } catch(error) {
@@ -133,7 +133,7 @@ describe('ArgumentContracts', () => {
         });
 
         it('should throw correct message if stringfy fails', () => {
-            const argument = { herWeGo: 'again' };
+            const argument: any = { herWeGo: 'again' };
             argument.then = argument;
             expect(() => ArgumentContracts.assertDate(argument)).toThrowError(/Expected/);
         });
@@ -173,7 +173,7 @@ describe('ArgumentContracts', () => {
         });
 
         it('should throw correct message if stringfy fails', () => {
-            const argument = { herWeGo: 'again' };
+            const argument: any = { herWeGo: 'again' };
             argument.then = argument;
             expect(() => ArgumentContracts.assertFunction(argument)).toThrowError(/Expected/);
         });
@@ -187,11 +187,11 @@ describe('ArgumentContracts', () => {
         it('should throw if argument is not a array', () => {
             expect(() => ArgumentContracts.assertArray(null)).toThrowError(/Expected/);
             expect(() => ArgumentContracts.assertArray(undefined)).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertArray('Some stringy thingy')).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertArray({})).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertArray(1234)).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertArray(()=>{})).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertArray(class thing {})).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertArray(<any>'Some stringy thingy')).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertArray(<any>{})).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertArray(<any>1234)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertArray(<any>(()=>{}))).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertArray(<any>(class thing {}))).toThrowError(/Expected/);
         });
 
         it('should throw error with argumentName if argument is not a array and argument name is provided', () => {
@@ -204,7 +204,7 @@ describe('ArgumentContracts', () => {
         });
 
         it('should stringify argument when throwing error', () => {
-            const argument = { herWeGo: 'again' };
+            const argument: any = { herWeGo: 'again' };
             try {
                 ArgumentContracts.assertArray(argument);
             } catch(error) {
@@ -213,7 +213,7 @@ describe('ArgumentContracts', () => {
         });
 
         it('should throw correct message if stringfy fails', () => {
-            const argument = { herWeGo: 'again' };
+            const argument: any = { herWeGo: 'again' };
             argument.then = argument;
             expect(() => ArgumentContracts.assertArray(argument)).toThrowError(/Expected/);
         });
@@ -227,10 +227,10 @@ describe('ArgumentContracts', () => {
         it('should throw if argument is not a array', () => {
             expect(() => ArgumentContracts.assertArrayOf(null, String)).toThrowError(/Expected/);
             expect(() => ArgumentContracts.assertArrayOf(undefined, String)).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertArrayOf({}, String)).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertArrayOf(1234, String)).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertArrayOf(()=>{}, String)).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertArrayOf(class thing {}, String)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertArrayOf(<any>{}, String)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertArrayOf(<any>1234, String)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertArrayOf(<any>(()=>{}), String)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertArrayOf(<any>(class thing {}), String)).toThrowError(/Expected/);
         });
 
         it('should throw error with argumentName if argument is not a array and argument name is provided', () => {
@@ -247,7 +247,7 @@ describe('ArgumentContracts', () => {
         });
 
         it('should NOT throw if argument is an array of Number', () => {
-            expect(() => ArgumentContracts.assertArrayOf([ 1234 ], Number)).not.toThrow();
+            expect(() => ArgumentContracts.assertArrayOf<Number>([ 1234 ], Number)).not.toThrow();
         });
 
         it('should NOT throw if argument is an array of Number', () => {
@@ -260,7 +260,7 @@ describe('ArgumentContracts', () => {
         });
 
         it('should NOT throw if argument is an array of Function', () => {
-            expect(() => ArgumentContracts.assertArrayOf([ new Function(() => {}) ], Function)).not.toThrow();
+            expect(() => ArgumentContracts.assertArrayOf([ new Function() ], Function)).not.toThrow();
         });
 
         it('should throw if argument is an array of Object, but contains a null', () => {
@@ -287,11 +287,11 @@ describe('ArgumentContracts', () => {
         it('should NOT throw if argument is an array of a specific type', () => {
             class TheTypeExists {}
 
-            expect(() => ArgumentContracts.assertArrayOf([ new TheTypeExists() ], TheTypeExists)).not.toThrow();
+            expect(() => ArgumentContracts.assertArrayOf<TheTypeExists>([ new TheTypeExists() ], <any>TheTypeExists)).not.toThrow();
         });
 
         it('should stringify argument when throwing error', () => {
-            const argument = { herWeGo: 'again' };
+            const argument: any = { herWeGo: 'again' };
             try {
                 ArgumentContracts.assertArrayOf(argument, String);
             } catch(error) {
@@ -300,7 +300,7 @@ describe('ArgumentContracts', () => {
         });
 
         it('should throw correct message if stringfy fails', () => {
-            const argument = { herWeGo: 'again' };
+            const argument: any = { herWeGo: 'again' };
             argument.then = argument;
             expect(() => ArgumentContracts.assertArrayOf(argument, String)).toThrowError(/Expected/);
         });
@@ -347,7 +347,7 @@ describe('ArgumentContracts', () => {
         });
 
         it('should NOT throw if argument is a Function', () => {
-            expect(() => ArgumentContracts.assertType( new Function(() => {}) , Function)).not.toThrow();
+            expect(() => ArgumentContracts.assertType( new Function() , Function)).not.toThrow();
         });
 
         it('should throw if argument is an Object, but contains a null', () => {
@@ -387,7 +387,7 @@ describe('ArgumentContracts', () => {
         });
 
         it('should throw correct message if stringfy fails', () => {
-            const argument = { herWeGo: 'again' };
+            const argument: any = { herWeGo: 'again' };
             argument.then = argument;
             expect(() => ArgumentContracts.assertType(argument, String)).toThrowError(/Expected/);
         });
@@ -401,11 +401,11 @@ describe('ArgumentContracts', () => {
         it('should throw if argument is not a string', () => {
             expect(() => ArgumentContracts.assertBoolean(null)).toThrowError(/Expected/);
             expect(() => ArgumentContracts.assertBoolean(undefined)).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertBoolean(1234)).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertBoolean({})).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertBoolean([])).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertBoolean(()=>{})).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertBoolean(class thing {})).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertBoolean(<any>1234)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertBoolean(<any>{})).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertBoolean(<any>[])).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertBoolean(<any>(()=>{}))).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertBoolean(<any>(class thing {}))).toThrowError(/Expected/);
         });
 
         it('should throw error with argumentName if argument is not a string and argument name is provided', () => {
@@ -422,7 +422,7 @@ describe('ArgumentContracts', () => {
         });
 
         it('should stringify argument when throwing error', () => {
-            const argument = { herWeGo: 'again' };
+            const argument: any = { herWeGo: 'again' };
             try {
                 ArgumentContracts.assertBoolean(argument);
             } catch(error) {
@@ -431,7 +431,7 @@ describe('ArgumentContracts', () => {
         });
 
         it('should throw correct message if stringfy fails', () => {
-            const argument = { herWeGo: 'again' };
+            const argument: any = { herWeGo: 'again' };
             argument.then = argument;
             expect(() => ArgumentContracts.assertBoolean(argument)).toThrowError(/Expected/);
         });
@@ -475,7 +475,7 @@ describe('ArgumentContracts', () => {
         });
 
         it('should throw correct message if stringfy fails', () => {
-            const argument = { herWeGo: 'again' };
+            const argument: any = { herWeGo: 'again' };
             argument.then = argument;
             expect(() => ArgumentContracts.assertSymbol(argument)).toThrowError(/Expected/);
         });

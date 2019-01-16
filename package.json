@@ -4,9 +4,10 @@
   "description": "A small and simple library for asserting argument are the correct types",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "postversion": "git push --follow-tags",
-    "prepare": "npm audit",
-    "pretest": "eslint index.js",
+    "prepare": "npm audit && npm run build",
+    "pretest": "eslint src/index.ts",
     "preversion": "npm test",
     "start": "node demo/index.js",
     "test": "jest",
@@ -36,8 +37,13 @@
   },
   "homepage": "https://github.com/terodox/argument-contracts#readme",
   "devDependencies": {
+    "@types/jest": "23.3.12",
     "eslint": "5.12.0",
-    "jest": "23.6.0"
+    "eslint-plugin-typescript": "0.14.0",
+    "jest": "23.6.0",
+    "ts-jest": "23.10.5",
+    "typescript": "3.1.1",
+    "typescript-eslint-parser": "21.0.2"
   },
   "engines": {
     "node": ">=6.14.0"
