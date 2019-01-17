@@ -2,6 +2,6 @@
     "extends": [
       "config:base"
     ],
-    "ignoreDeps": [ "node" ],
+    "ignoreDeps": [ "node", "typescript" ],
     "pinVersions": true
 }
