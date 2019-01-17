@@ -1,3 +1,5 @@
+import coerce from '@meltwater/coerce';
+
 function isTypeMatch(argument, type) {
     if (type == String) {
         return typeof argument == 'string' || argument instanceof String;
@@ -27,72 +29,83 @@ function isTypeMatch(argument, type) {
         return typeof argument == 'symbol';
     }
 
-    return argument instanceof type;
+    try {
+        coerce(argument, type, '');
+        return true;
+    } catch(__) {
+        return false;
+    }
 }
 
-function throwError(argument, argumentName, typeString) {
+interface ArgumentError {
+    argument: any;
+    argumentName?: String|undefined;
+    typeString: String;
+}
+
+function throwError(argumentError: ArgumentError) {
     let argumentString;
     try {
-        argumentString = JSON.stringify(argument);
+        argumentString = JSON.stringify(argumentError.argument);
     } catch (_) {
-        argumentString = argument;
+        argumentString = argumentError.argument;
     }
-    throw new TypeError(`Expected ${argumentName || 'argument'} to be ${typeString}. Value received: ${argumentString}`);
+    throw new TypeError(`Expected ${argumentError.argumentName || 'argument'} to be ${argumentError.typeString}. Value received: ${argumentString}`);
 }
 
 export default class ArgumentContracts {
     static assertArray(argument: Array<any>, argumentName?: String) {
         if (!Array.isArray(argument)) {
-            throwError(argument, argumentName, 'an array');
+            throwError({ argument, argumentName, typeString: 'an array' });
         }
     }
 
-    static assertArrayOf<T>(argument: Array<T>, type: () => T, argumentName?: String) {
+    static assertArrayOf<T>(argument: Array<T>, type: any, argumentName?: String) {
         ArgumentContracts.assertArray(argument, argumentName);
         if (!argument.every(item => isTypeMatch(item, type))) {
-            throwError(argument, argumentName, `an array of ${type}`);
+            throwError({ argument, argumentName, typeString: `an array of ${type}` });
         }
     }
 
     static assertBoolean(argument: Boolean, argumentName?: String) {
         if (!isTypeMatch(argument, Boolean)) {
-            throwError(argument, argumentName, 'a boolean');
+            throwError({ argument, argumentName, typeString: 'a boolean' });
         }
     }
 
     static assertDate(argument: Date|Number, argumentName?: String) {
         if (!isTypeMatch(argument, Date)) {
-            throwError(argument, argumentName, 'a boolean');
+            throwError({ argument, argumentName, typeString: 'a boolean' });
         }
     }
 
-    static assertFunction(argument, argumentName?: String) {
+    static assertFunction(argument: Function, argumentName?: String) {
         if (!isTypeMatch(argument, Function)) {
-            throwError(argument, argumentName, 'a function');
+            throwError({ argument, argumentName, typeString: 'a function' });
         }
     }
 
-    static assertNumber(argument, argumentName?: String) {
+    static assertNumber(argument: Number, argumentName?: String) {
         if (!isTypeMatch(argument, Number)) {
-            throwError(argument, argumentName, 'a number');
+            throwError({ argument, argumentName, typeString: 'a number' });
         }
     }
 
-    static assertString(argument, argumentName?: String) {
+    static assertString(argument: String, argumentName?: String) {
         if (!isTypeMatch(argument, String)) {
-            throwError(argument, argumentName, 'a string');
+            throwError({ argument, argumentName, typeString: 'a string' });
         }
     }
 
-    static assertSymbol(argument, argumentName?: String) {
+    static assertSymbol(argument: Symbol, argumentName?: String) {
         if (!isTypeMatch(argument, Symbol)) {
-            throwError(argument, argumentName, 'a symbol');
+            throwError({ argument, argumentName, typeString: 'a symbol' });
         }
     }
 
-    static assertType(argument, type, argumentName?: String) {
+    static assertType<T>(argument: T, type: any, argumentName?: String) {
         if (!isTypeMatch(argument, type)) {
-            throwError(argument, argumentName, `a ${type}`);
+            throwError({ argument, argumentName, typeString: `a ${type}` });
         }
     }
 }
