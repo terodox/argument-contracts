@@ -1,0 +1,9 @@
+demo/
+src/
+.drone.yml
+.eslintignore
+.eslintrc
+.nvmrc
+jest.config.jest
+renovate.json
+tsconfig.json
