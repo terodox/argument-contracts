@@ -4,6 +4,6 @@ src/
 .eslintignore
 .eslintrc
 .nvmrc
-jest.config.jest
+jest.config.js
 renovate.json
 tsconfig.json
