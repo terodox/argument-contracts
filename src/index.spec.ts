@@ -336,15 +336,6 @@ describe('ArgumentContracts', () => {
             expect(ArgumentContracts.assertType).toEqual(expect.any(Function));
         });
 
-        it('should throw if argument is not a array', () => {
-            expect(() => ArgumentContracts.assertType(null, String)).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertType(undefined, String)).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertType({}, String)).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertType(1234, String)).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertType(()=>{}, String)).toThrowError(/Expected/);
-            expect(() => ArgumentContracts.assertType(class thing {}, String)).toThrowError(/Expected/);
-        });
-
         it('should throw error with argumentName if argument is not a array and argument name is provided', () => {
             const argumentName = 'thatThingYouLike';
             expect(() => ArgumentContracts.assertType(null, String, argumentName)).toThrowError(new RegExp(argumentName));
@@ -414,7 +405,8 @@ describe('ArgumentContracts', () => {
         it('should throw correct message if stringfy fails', () => {
             const argument: any = { herWeGo: 'again' };
             argument.then = argument;
-            expect(() => ArgumentContracts.assertType(argument, String)).toThrowError(/Expected/);
+
+            expect(() => ArgumentContracts.assertType(argument, SimpleClass)).toThrowError(/Expected/);
         });
 
         it('should not throw for objects that are duck typable', () => {
