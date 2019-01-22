@@ -29,17 +29,35 @@ function isTypeMatch(argument, type) {
         return typeof argument == 'symbol';
     }
 
+    return null;
+}
+
+interface SpecificMatchResult {
+    isMatch: Boolean,
+    error?: Error
+}
+
+function isSpecificTypeMatch(argument, type): SpecificMatchResult {
+    const result = isTypeMatch(argument, type);
+    if(result !== null) {
+        return { isMatch: result };
+    }
+
     try {
         coerce(argument, type, '');
-        return true;
-    } catch(__) {
-        return false;
+        return { isMatch: true };
+    } catch(error) {
+        return {
+            isMatch: false,
+            error
+        };
     }
 }
 
 interface ArgumentError {
     argument: any;
     argumentName?: String|undefined;
+    innerError?: Error;
     typeString: String;
 }
 
@@ -50,7 +68,11 @@ function throwError(argumentError: ArgumentError) {
     } catch (_) {
         argumentString = argumentError.argument;
     }
-    throw new TypeError(`Expected ${argumentError.argumentName || 'argument'} to be ${argumentError.typeString}. Value received: ${argumentString}`);
+    let errorString = `Expected ${argumentError.argumentName || 'argument'} to be ${argumentError.typeString}. Value received: ${argumentString}`;
+    if(argumentError.innerError) {
+        errorString += `Inner Error: ${argumentError.innerError.message}`;
+    }
+    throw new TypeError(errorString);
 }
 
 export default class ArgumentContracts {
@@ -62,8 +84,12 @@ export default class ArgumentContracts {
 
     static assertArrayOf<T>(argument: Array<T>, type: any, argumentName?: String) {
         ArgumentContracts.assertArray(argument, argumentName);
-        if (!argument.every(item => isTypeMatch(item, type))) {
-            throwError({ argument, argumentName, typeString: `an array of ${type}` });
+        let result;
+        if (!argument.every(item => {
+            result = isSpecificTypeMatch(item, type);
+            return result.isMatch;
+        })) {
+            throwError({ argument, argumentName, innerError: result.error, typeString: `an array of ${type}` });
         }
     }
 
@@ -104,8 +130,9 @@ export default class ArgumentContracts {
     }
 
     static assertType<T>(argument: T, type: any, argumentName?: String) {
-        if (!isTypeMatch(argument, type)) {
-            throwError({ argument, argumentName, typeString: `a ${type}` });
+        const result = isSpecificTypeMatch(argument, type);
+        if (!result.isMatch) {
+            throwError({ argument, argumentName, innerError: result.error, typeString: `a ${type}` });
         }
     }
 }
