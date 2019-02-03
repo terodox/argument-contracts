@@ -1,6 +1,10 @@
 import coerce from '@meltwater/coerce';
 
 function isTypeMatch(argument, type) {
+    if (type == Array) {
+        return Array.isArray(argument);
+    }
+
     if (type == String) {
         return typeof argument == 'string' || argument instanceof String;
     }
@@ -77,7 +81,7 @@ function throwError(argumentError: ArgumentError) {
 
 export default class ArgumentContracts {
     static assertArray(argument: Array<any>, argumentName?: String) {
-        if (!Array.isArray(argument)) {
+        if (!isTypeMatch(argument, Array)) {
             throwError({ argument, argumentName, typeString: 'an array' });
         }
     }
