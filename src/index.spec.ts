@@ -329,6 +329,12 @@ describe('ArgumentContracts', () => {
 
             expect(() => ArgumentContracts.assertArrayOf<SimpleClass>([argument, argument, argument, argument], SimpleClass, 'argument')).toThrowError(/argument/);
         });
+
+        it('should throw for an array of arrays that is passed strings', () => {
+            const argument:any = 'abcd';
+
+            expect(() => ArgumentContracts.assertArrayOf<Array<any>>([argument, argument, argument, argument], Array, 'argument')).toThrowError(/argument/);
+        });
     });
 
     describe('assertType', () => {
