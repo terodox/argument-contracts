@@ -57,6 +57,16 @@ function throwError(argumentError: ArgumentError) {
     throw new TypeError(`Expected ${argumentError.argumentName || 'argument'} to be ${argumentError.typeString}. Value received: ${argumentString}`);
 }
 
+const pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+    '(\\?[:;&a-z\\d%_.,~+=-]*)?'+ // query string
+    '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+function validUrl(str): Boolean {
+    return pattern.test(str);
+}
+
 export default class ArgumentContracts {
     static assertArray(argument: Array<any>, argumentName?: String) {
         if (!isTypeMatch(argument, Array)) {
@@ -110,6 +120,13 @@ export default class ArgumentContracts {
     static assertType<T>(argument: T, type: any, argumentName?: String) {
         if (!isTypeMatch(argument, type)) {
             throwError({ argument, argumentName, typeString: `a ${type}` });
+        }
+    }
+
+    static assertUrl(argument: String, argumentName?: String) {
+        this.assertString(argument, argumentName);
+        if(!validUrl(argument)) {
+            throwError({ argument, argumentName, typeString: 'a url' });
         }
     }
 }

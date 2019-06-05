@@ -527,4 +527,54 @@ describe('ArgumentContracts', () => {
             expect(() => ArgumentContracts.assertSymbol(argument)).toThrowError(/Expected/);
         });
     });
+
+    describe('assertUrl', () => {
+        it('should be a static method', () => {
+            expect(ArgumentContracts.assertUrl).toEqual(expect.any(Function));
+        });
+
+        it('should throw if argument is not a string', () => {
+            expect(() => ArgumentContracts.assertUrl(null)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertUrl(undefined)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertUrl(<any>1234)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertUrl(<any>{})).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertUrl(<any>[])).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertUrl(<any>(()=>{}))).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertUrl(<any>class thing {})).toThrowError(/Expected/);
+        });
+
+        it('should throw error with argumentName if argument is not a string and argument name is provided', () => {
+            const argumentName = 'thatThingYouLike';
+            expect(() => ArgumentContracts.assertUrl(null, argumentName)).toThrowError(new RegExp(argumentName));
+        });
+
+        it('should NOT throw if argument is a string', () => {
+            expect(() => ArgumentContracts.assertUrl('https://things.and.stuff')).not.toThrow();
+        });
+
+        it('should NOT throw if argument is a complex Url', () => {
+            expect(() => ArgumentContracts.assertUrl(new String('http://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&docid=nIv5rk2GyP3hXM&tbnid=isiOkMe3nCtexM:&ved=0CAUQjRw&url=http%3A%2F%2Fanimalcrossing.wikia.com%2Fwiki%2FLion&ei=ygZXU_2fGKbMsQTf4YLgAQ&bvm=bv.65177938,d.aWc&psig=AFQjCNEpBfKnal9kU7Zu4n7RnEt2nerN4g&ust=1398298682009707')))
+                .not.toThrow();
+        });
+
+        it('should NOT throw if argument is a simple Url', () => {
+            expect(() => ArgumentContracts.assertUrl(new String('http://this.is.a.simple.url')))
+                .not.toThrow();
+        });
+
+        it('should stringify argument when throwing error', () => {
+            const argument: any = { herWeGo: 'again' };
+            try {
+                ArgumentContracts.assertUrl(argument);
+            } catch(error) {
+                expect(error.message).toMatch(JSON.stringify(argument));
+            }
+        });
+
+        it('should throw correct message if stringfy fails', () => {
+            const argument: any = { herWeGo: 'again' };
+            argument.then = argument;
+            expect(() => ArgumentContracts.assertUrl(argument)).toThrowError(/Expected/);
+        });
+    });
 });
