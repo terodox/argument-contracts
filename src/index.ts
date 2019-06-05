@@ -63,9 +63,9 @@ const pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
     '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
     '(\\?[:;&a-z\\d%_.,~+=-]*)?'+ // query string
     '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
-function validUrl(str) {
-    return !!pattern.test(str);
-  }
+function validUrl(str): Boolean {
+    return pattern.test(str);
+}
 
 export default class ArgumentContracts {
     static assertArray(argument: Array<any>, argumentName?: String) {
