@@ -6,7 +6,7 @@ pipeline:
   install:
     image: node:11
     commands:
-      - npm i
+      - npm ci
   test:
     group: test
     image: node:11
