@@ -4,20 +4,19 @@
 
 A small and simple library for asserting arguments are the correct types
 
-
-# Install
+## Install
 
 ```bash
-npm i argument-contracts
+npm i -E argument-contracts
 ```
 
-# Uses
+## Uses
 
 We all need to validate objects at the edges of our code.  Whether it's handling an API response or accepting user input, validating objects can be a monotonous and tedious task. The aim of this library is to simplify that task as much as possible.
 
-# Usage
+## Usage
 
-## javascript
+### javascript
 
 ```javascript
 const ArgumentContracts = require('argument-contracts');
@@ -61,7 +60,7 @@ functionNeedingMySpecialType();
 // Will throw error: Expected specialTypeArgument to be a MySpecialType. Value Received: undefined
 ```
 
-## typescript
+### typescript
 
 ```typescript
 import ArgumentContracts from 'argument-contracts';
@@ -107,7 +106,6 @@ functionNeedingMySpecialType();
 
 For more usage examples please see [Demo](demo/index.js)
 
-# Contributing
+## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)
-

@@ -37,18 +37,18 @@
   },
   "homepage": "https://github.com/terodox/argument-contracts#readme",
   "devDependencies": {
-    "@types/jest": "24.0.15",
-    "@typescript-eslint/parser": "1.11.0",
-    "eslint": "6.0.1",
+    "@types/jest": "24.0.18",
+    "@typescript-eslint/parser": "2.3.2",
+    "eslint": "6.5.1",
     "eslint-plugin-typescript": "0.14.0",
-    "jest": "24.8.0",
-    "ts-jest": "24.0.2",
-    "typescript": "3.5.3"
+    "jest": "24.9.0",
+    "ts-jest": "24.1.0",
+    "typescript": "3.6.3"
   },
   "engines": {
     "node": ">=6.14.0"
   },
   "dependencies": {
-    "@meltwater/coerce": "0.1.1"
+    "@meltwater/coerce": "0.1.3"
   }
 }
