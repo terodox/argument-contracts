@@ -1,4 +1,4 @@
-const ArgumentContracts = require('../index');
+const ArgumentContracts = require('../index').default;
 
 function consoleLogErrors(throwingFunc) {
     try {
@@ -22,6 +22,8 @@ consoleLogErrors(() => ArgumentContracts.assertFunction(NUMBER_VALUE));
 consoleLogErrors(() => ArgumentContracts.assertFunction(NUMBER_VALUE, 'functionArgument'));
 consoleLogErrors(() => ArgumentContracts.assertNumber(STRING_VALUE));
 consoleLogErrors(() => ArgumentContracts.assertNumber(STRING_VALUE, 'numberArgument'));
+consoleLogErrors(() => ArgumentContracts.assertObject(STRING_VALUE));
+consoleLogErrors(() => ArgumentContracts.assertObject(STRING_VALUE, 'objectArgument'));
 consoleLogErrors(() => ArgumentContracts.assertString(NUMBER_VALUE));
 consoleLogErrors(() => ArgumentContracts.assertString(NUMBER_VALUE, 'stringArgument'));
 consoleLogErrors(() => ArgumentContracts.assertType(STRING_VALUE, SomeMagicalType));

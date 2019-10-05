@@ -102,6 +102,44 @@ describe('ArgumentContracts', () => {
         });
     });
 
+    describe('assertObject', () => {
+        it('should be a static method', () => {
+            expect(ArgumentContracts.assertObject).toEqual(expect.any(Function));
+        });
+
+        it('should throw if argument is not an object', () => {
+            expect(() => ArgumentContracts.assertObject(null)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertObject(undefined)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertObject(<any>'Some stringy thingy')).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertObject(<any>1234)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertObject(<any>true)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertObject(<any>(()=>{}))).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertObject(<any>(class thing {}))).toThrowError(/Expected/);
+        });
+
+        it('should throw error with argumentName if argument is not a object and argument name is provided', () => {
+            const argumentName = 'thatThingYouLike';
+            expect(() => ArgumentContracts.assertObject(null, argumentName)).toThrowError(new RegExp(argumentName));
+        });
+
+        it('should NOT throw if argument is an object', () => {
+            expect(() => ArgumentContracts.assertObject({})).not.toThrow();
+        });
+
+        it('should NOT throw if argument is an Object', () => {
+            expect(() => ArgumentContracts.assertObject(new Object())).not.toThrow();
+        });
+
+        it('should stringify argument when throwing error', () => {
+            const argument: any = { herWeGo: 'again' };
+            try {
+                ArgumentContracts.assertObject(argument);
+            } catch(error) {
+                expect(error.message).toMatch(JSON.stringify(argument));
+            }
+        });
+    });
+
     describe('assertDate', () => {
         it('should be a static method', () => {
             expect(ArgumentContracts.assertDate).toEqual(expect.any(Function));
