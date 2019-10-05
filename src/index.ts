@@ -107,7 +107,7 @@ export default class ArgumentContracts {
 
     static assertObject(argument: Object, argumentName?: String) {
         if (!isTypeMatch(argument, Object)) {
-            throwError({ argument, argumentName, typeString: 'an oobject' });
+            throwError({ argument, argumentName, typeString: 'an object' });
         }
     }
 
