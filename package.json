@@ -45,9 +45,6 @@
     "ts-jest": "24.1.0",
     "typescript": "3.6.3"
   },
-  "engines": {
-    "node": ">=6.14.0"
-  },
   "dependencies": {
     "@meltwater/coerce": "0.1.3"
   }
