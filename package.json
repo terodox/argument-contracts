@@ -43,7 +43,7 @@
     "eslint-plugin-typescript": "0.14.0",
     "jest": "24.9.0",
     "ts-jest": "24.1.0",
-    "typescript": "3.6.3"
+    "typescript": "3.9.6"
   },
   "dependencies": {
     "@meltwater/coerce": "0.1.3"
