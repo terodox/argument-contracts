@@ -9,6 +9,7 @@
         "target": "es5"
     },
     "files": [
+        "src/arg-name.ts",
         "src/index.ts"
     ]
 }
