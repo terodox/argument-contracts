@@ -14,7 +14,7 @@ npm i -E argument-contracts
 
 We all need to validate objects at the edges of our code.  Whether it's handling an API response or accepting user input, validating objects can be a monotonous and tedious task. The aim of this library is to simplify that task as much as possible.
 
-## Usage
+## Basic Usage
 
 ### javascript
 
@@ -105,6 +105,23 @@ functionNeedingMySpecialType();
 ```
 
 For more usage examples please see [Demo](demo/index.js)
+
+## Using argName function to keep code maintainable
+
+One of the challenges with this library can be the string name of the argument. To help with that we provide a function that can create a string version of the variable used as an argument.
+
+This is maintained in a separate file because it relies on the presence of `Reflect` which may not be available to all environments (Most notably IE11).
+
+It's important to note that this only works with variables, and that they must be wrapped in an object.
+
+```javascript
+import ArgumentContracts from 'argument-contracts';
+const { argName } = require('argument-contracts/arg-name');
+
+const someParameter = 'The greatest parameter on earth!';
+ArgumentContracts.assertNumber(someParameter, argName({someParameter}));
+// Will throw error: Expected someParameter to be a number. Value received: "The greatest parameter on earth!"
+```
 
 ## Contributing
 
