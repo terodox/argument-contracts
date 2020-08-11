@@ -7,6 +7,7 @@
     "build": "tsc",
     "postversion": "git push --follow-tags",
     "prepare": "npm audit && npm run build",
+    "prestart": "npm run build",
     "pretest": "eslint src/index.ts",
     "preversion": "npm test",
     "start": "node demo/index.js",
