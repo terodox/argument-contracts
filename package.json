@@ -38,11 +38,11 @@
   },
   "homepage": "https://github.com/terodox/argument-contracts#readme",
   "devDependencies": {
-    "@types/jest": "26.0.9",
+    "@types/jest": "26.0.13",
     "@typescript-eslint/parser": "3.9.0",
     "eslint": "7.6.0",
     "eslint-plugin-typescript": "0.14.0",
-    "jest": "26.3.0",
+    "jest": "26.4.2",
     "ts-jest": "26.2.0",
     "typescript": "3.9.7"
   },
