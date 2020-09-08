@@ -13,6 +13,7 @@ class SomeMagicalType { }
 
 const NUMBER_VALUE = 1234;
 const STRING_VALUE = '1234';
+const WHITE_SPACE_STRING = '   ';
 consoleLogErrors(() => ArgumentContracts.assertArray(NUMBER_VALUE));
 consoleLogErrors(() => ArgumentContracts.assertArray(NUMBER_VALUE, 'arrayArgument'));
 consoleLogErrors(() => ArgumentContracts.assertArray(NUMBER_VALUE, argName({ NUMBER_VALUE })));
@@ -24,6 +25,12 @@ consoleLogErrors(() => ArgumentContracts.assertArrayOf([NUMBER_VALUE], String, '
 consoleLogErrors(() => ArgumentContracts.assertFunction(NUMBER_VALUE));
 consoleLogErrors(() => ArgumentContracts.assertFunction(NUMBER_VALUE, 'functionArgument'));
 consoleLogErrors(() => ArgumentContracts.assertFunction(NUMBER_VALUE, argName({ NUMBER_VALUE })));
+consoleLogErrors(() => ArgumentContracts.assertNonWhiteSpaceString(WHITE_SPACE_STRING));
+consoleLogErrors(() => ArgumentContracts.assertNonWhiteSpaceString(WHITE_SPACE_STRING, 'stringArgument'));
+consoleLogErrors(() => ArgumentContracts.assertNonWhiteSpaceString(WHITE_SPACE_STRING, argName({ WHITE_SPACE_STRING })));
+consoleLogErrors(() => ArgumentContracts.assertNotNil(null));
+consoleLogErrors(() => ArgumentContracts.assertNotNil(undefined));
+consoleLogErrors(() => ArgumentContracts.assertNotNil(undefined, 'someArgumentName'));
 consoleLogErrors(() => ArgumentContracts.assertNumber(STRING_VALUE));
 consoleLogErrors(() => ArgumentContracts.assertNumber(STRING_VALUE, 'numberArgument'));
 consoleLogErrors(() => ArgumentContracts.assertNumber(STRING_VALUE, argName({ STRING_VALUE })));
