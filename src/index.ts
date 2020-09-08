@@ -99,6 +99,18 @@ export default class ArgumentContracts {
         }
     }
 
+    static assertNotNil(argument: any, argumentName?: String) {
+        if(argument == null) {
+            throwError({ argument, argumentName, typeString: 'not null or undefined' });
+        }
+    }
+    static assertNonWhiteSpaceString(argument: String, argumentName?: String) {
+        ArgumentContracts.assertString(argument, argumentName);
+        if(argument.trim() === '') {
+            throwError({ argument, argumentName, typeString: 'a non white space string' });
+        }
+    }
+
     static assertNumber(argument: Number, argumentName?: String) {
         if (!isTypeMatch(argument, Number)) {
             throwError({ argument, argumentName, typeString: 'a number' });

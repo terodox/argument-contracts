@@ -58,6 +58,83 @@ describe('ArgumentContracts', () => {
         });
     });
 
+    describe('assertNonWhiteSpaceString', () => {
+        it('should be a static method', () => {
+            expect(ArgumentContracts.assertNonWhiteSpaceString).toEqual(expect.any(Function));
+        });
+
+        it('should throw if argument is not a string', () => {
+            expect(() => ArgumentContracts.assertNonWhiteSpaceString(null)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertNonWhiteSpaceString(undefined)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertNonWhiteSpaceString('')).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertNonWhiteSpaceString('     ')).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertNonWhiteSpaceString('\n')).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertNonWhiteSpaceString('\t')).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertNonWhiteSpaceString(<any>1234)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertNonWhiteSpaceString(<any>{})).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertNonWhiteSpaceString(<any>[])).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertNonWhiteSpaceString(<any>(()=>{}))).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertNonWhiteSpaceString(<any>class thing {})).toThrowError(/Expected/);
+        });
+
+        it('should throw error with argumentName if argument is not a string and argument name is provided', () => {
+            const argumentName = 'thatThingYouLike';
+            expect(() => ArgumentContracts.assertNonWhiteSpaceString(null, argumentName)).toThrowError(new RegExp(argumentName));
+        });
+
+        it('should NOT throw if argument is a string', () => {
+            expect(() => ArgumentContracts.assertNonWhiteSpaceString('The string you need')).not.toThrow();
+        });
+
+        it('should NOT throw if argument is a String', () => {
+            expect(() => ArgumentContracts.assertNonWhiteSpaceString(new String('The string you need'))).not.toThrow();
+        });
+
+        it('should stringify argument when throwing error', () => {
+            const argument: any = { herWeGo: 'again' };
+            try {
+                ArgumentContracts.assertNonWhiteSpaceString(argument);
+            } catch(error) {
+                expect(error.message).toMatch(JSON.stringify(argument));
+            }
+        });
+
+        it('should throw correct message if stringfy fails', () => {
+            const argument: any = { herWeGo: 'again' };
+            argument.then = argument;
+            expect(() => ArgumentContracts.assertNonWhiteSpaceString(argument)).toThrowError(/Expected/);
+        });
+    });
+
+    describe('assertNotNil', () => {
+        it('should be a static method', () => {
+            expect(ArgumentContracts.assertNotNil).toEqual(expect.any(Function));
+        });
+
+        it('should throw if argument is null or undefined', () => {
+            expect(() => ArgumentContracts.assertNotNil(null)).toThrowError(/Expected/);
+            expect(() => ArgumentContracts.assertNotNil(undefined)).toThrowError(/Expected/);
+        });
+
+        it('should throw error with argumentName if argument is null and argument name is provided', () => {
+            const argumentName = 'thatThingYouLike';
+            expect(() => ArgumentContracts.assertNotNil(null, argumentName)).toThrowError(new RegExp(argumentName));
+        });
+
+        it('should NOT throw if argument is not null or undefined', () => {
+            expect(() => ArgumentContracts.assertNotNil('A non null or undefined value')).not.toThrow();
+        });
+
+        it('should stringify argument when throwing error', () => {
+            const argument: any = null;
+            try {
+                ArgumentContracts.assertNotNil(argument);
+            } catch(error) {
+                expect(error.message).toMatch(JSON.stringify(argument));
+            }
+        });
+    });
+
     describe('assertNumber', () => {
         it('should be a static method', () => {
             expect(ArgumentContracts.assertNumber).toEqual(expect.any(Function));
