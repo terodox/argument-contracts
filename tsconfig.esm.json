@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "declaration": true,
+        "lib": [ "es5", "es2015" ],
+        "moduleResolution": "Node",
+        "noImplicitAny": false,
+        "outDir": "./esm",
+        "removeComments": true,
+        "resolveJsonModule": true,
+        "strict": true,
+        "target": "ESNext",
+    },
+    "files": [
+        "src/main.ts"
+    ]
+}
