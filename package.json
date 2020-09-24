@@ -1,6 +1,6 @@
 {
   "name": "argument-contracts",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A small and simple library for asserting argument are the correct types",
   "main": "index.js",
   "module": "esm/main.js",
