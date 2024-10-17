@@ -4,16 +4,16 @@ clone:
 
 pipeline:
   install:
-    image: node:11
+    image: node:23
     commands:
       - npm ci
   test:
     group: test
-    image: node:11
+    image: node:23
     commands:
     - npm test
   publish:
-    image: node:11
+    image: node:23
     commands:
       - echo "//registry.npmjs.org/:_authToken=$${NPM_DEPLOY_TOKEN}" > ~/.npmrc
       - echo "unsafe-perm=true" >> ~/.npmrc
